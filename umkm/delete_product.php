@@ -2,7 +2,7 @@
 require_once "../config/database.php";
 require_once "../core/functions.php";
 
-checkLogin()
+checkLogin();
 checkRole("umkm");
 
 $user_id = $_SESSION["user"]["id"];
