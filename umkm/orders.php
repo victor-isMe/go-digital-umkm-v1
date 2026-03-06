@@ -23,6 +23,7 @@ $orders = $stmt->fetchAll();
     <div>
         Order ID: <?= $order["id"] ?><br>
         Total: Rp<?= $order["total_price"] ?><br>
+        Metode Bayar: <?= $order["payment_method"] ?><br>
         Status: <?= $order["status"] ?><br>
 
         <a href="update_status.php?id=<?= $order["id"] ?>&status=diproses">Proses</a> |
