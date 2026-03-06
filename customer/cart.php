@@ -28,6 +28,14 @@ $total = 0;
     Total: <strong>Rp<?= $total ?></strong>
 
     <form action="checkout.php" method="POST">
+        Metode Pembayaran:
+        <select name="payment_method" required>
+            <option value="qris">QRIS</option>
+            <option value="transfer">Transfer Bank</option>
+        </select>
+
+        <br><br>
+
         <button type="submit">Checkout</button>
     </form>
 <?php endif; ?>
