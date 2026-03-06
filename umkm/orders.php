@@ -26,6 +26,7 @@ $orders = $stmt->fetchAll();
         Status: <?= $order["status"] ?><br>
 
         <a href="update_status.php?id=<?= $order["id"] ?>&status=diproses">Proses</a> |
+        <a href="update_status.php?id=<?= $order["id"] ?>&status=dikirim">Kirim</a>
         <a href="update_status.php?id=<?= $order["id"] ?>&status=selesai">Selesai</a>
 
         <hr>
