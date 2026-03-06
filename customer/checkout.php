@@ -15,14 +15,15 @@ $pdo->beginTransaction();
 
 try {
     $cust_id = $_SESSION["user"]["id"];
+    $payment_method = $_POST["payment_method"];
     $total = 0;
 
     foreach ($cart as $item) {
         $total += $item["price"] * $item["quantity"];
     }
 
-    $stmt = $pdo->prepare("INSERT INTO orders (customer_id,total_price,status) VALUES (?,?,'pending')");
-    $stmt->execute([$cust_id, $total]);
+    $stmt = $pdo->prepare("INSERT INTO orders (customer_id,total_price,payment_method,status) VALUES (?,?,?,'pending')");
+    $stmt->execute([$cust_id, $total, $payment_method]);
 
     $order_id = $pdo->lastInsertId();
 
