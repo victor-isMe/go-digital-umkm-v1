@@ -4,9 +4,10 @@ require_once "../core/functions.php";
 
 $id = $_GET["id"];
 
-$stmt = $pdo->prepare("SELECT products.*, users.name AS umkm_name
+$stmt = $pdo->prepare("SELECT products.*, users.name AS umkm_name, categories.name AS category_name
                         FROM products
                         JOIN users ON products.user_id = users.id
+                        LEFT JOIN categories ON products.category_id = categories.id
                         WHERE products.id=?");
 $stmt->execute([$id]);
 $product = $stmt->fetch();
@@ -18,6 +19,7 @@ if (!$product) {
 
 <h2><?= htmlspecialchars($product["name"]) ?></h2>
 
+Kategori: <?= $product["category_name"] ?><br>
 UMKM: <?= htmlspecialchars($product["umkm_name"]) ?><br>
 Harga: Rp<?= $product["price"] ?><br>
 Stok: <?= $product["stock"] ?><br>
