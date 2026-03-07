@@ -16,6 +16,7 @@ $total_pendapatan = $pdo->query("SELECT SUM(total_price) FROM orders WHERE statu
 
 <a href="users.php">Kelola User</a> |
 <a href="products.php">Lihat Produk UMKM</a> |
+<a href="categories.php">Kelola Kategori Produk</a> |
 <a href="orders.php">Lihat Transaksi</a> |
 <a href="../auth/logout.php">Logout</a>
 
