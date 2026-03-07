@@ -10,6 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $name = $_POST["name"];
     $price = $_POST["price"];
     $stock = $_POST["stock"];
+    $category_id = $_POST["category_id"];
     $description = $_POST["description"];
 
     $imageName = null;
@@ -19,8 +20,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         move_uploaded_file($_FILES["image"]["tmp_name"], "../uploads/products/" . $imageName);
     }
 
-    $stmt = $pdo->prepare("INSERT INTO products (user_id, name, price, stock, description, image) VALUES (?,?,?,?,?,?)");
-    $stmt->execute([$user_id, $name, $price, $stock, $description, $imageName]);
+    $stmt = $pdo->prepare("INSERT INTO products (user_id, category_id, name, price, stock, description, image) VALUES (?,?,?,?,?,?,?)");
+    $stmt->execute([$user_id, $category_id, $name, $price, $stock, $description, $imageName]);
+
+    $categories = $pdo->query("SELECT * FROM categories")->fetchAll();
 
     redirect("my_products.php");
 }
@@ -37,6 +40,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     Stok: <br>
     <input type="number" name="stock" required><br><br>
+
+    Kategori: <br>
+    <select name="category_id" required>
+        <?php foreach ($categories as $categori): ?>
+            <option value="<?= $categori["id"] ?>">
+                <?= $categori["name"] ?>
+            </option>
+        <?php endforeach; ?>
+    </select><br><br>
 
     Deskripsi: <br>
     <textarea name="description"></textarea><br><br>
