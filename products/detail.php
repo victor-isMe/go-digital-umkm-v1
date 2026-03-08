@@ -12,6 +12,15 @@ $stmt = $pdo->prepare("SELECT products.*, users.name AS umkm_name, categories.na
 $stmt->execute([$id]);
 $product = $stmt->fetch();
 
+$stmtReviews = $pdo->prepare("SELECT reviews.*, users.name 
+                            FROM reviews
+                            JOIN users ON reviews.user_id=users.id
+                            WHERE product_id=?
+                            ORDER BY created_at DESC    
+                            ");
+$stmtReviews->execute([$id]);
+$reviews = $stmtReviews->fetchAll();
+
 if (!$product) {
     die("Produk tidak ditemukan!");
 }
@@ -38,3 +47,21 @@ Deskripsi: <?= htmlspecialchars($product["description"]) ?><br>
 
 <hr>
 <a href="list.php">Kembali</a>
+<hr>
+
+<h3>Reviews Produk</h3>
+
+<?php if (empty($reviews)): ?>
+    Belum ada review
+
+<?php else: ?>
+
+<?php foreach ($reviews as $review): ?>
+    <div>
+        <strong><?= $review["name"] ?></strong><br>
+        Rating: ⭐<?= $review["rating"] ?>/5 <br>
+        Komentar: <?= htmlspecialchars($review["comment"]) ?><br>
+        <hr>
+    </div>
+<?php endforeach; ?>
+<?php endif; ?>
