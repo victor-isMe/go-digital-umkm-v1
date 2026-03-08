@@ -51,6 +51,28 @@ Deskripsi: <?= htmlspecialchars($product["description"]) ?><br>
 
 <h3>Reviews Produk</h3>
 
+<?php if (isset($_SESSION["user"]) && $_SESSION["user"]["role"] == "customer"): ?>
+    <h3>Beri rating pada produk ini</h3>
+
+    <form action="../reviews/add_review.php" method="POST">
+        <input type="hidden" name="product_id" value="<?= $product["id"] ?>">
+
+        Rating: 
+        <select name="rating" required>
+            <option value="5">5 - Sangat Bagus</option>
+            <option value="4">4 - Bagus</option>
+            <option value="3">3 - Cukup</option>
+            <option value="2">2 - Kurang</option>
+            <option value="1">1 - Buruk</option>
+        </select><br><br>
+
+        Komentar: 
+        <textarea name="comment" required></textarea><br><br>
+
+        <button type="submit">Kirim Rating</button>
+    </form>
+<?php endif; ?>
+
 <?php if (empty($reviews)): ?>
     Belum ada review
 
