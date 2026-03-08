@@ -58,7 +58,7 @@ $categories = $pdo->query("SELECT * FROM categories")->fetchAll();
 
     Produk tidak ditemukan
 
-<?php endif; ?>
+<?php else: ?>
 
 <?php foreach ($products as $product): ?>
     <div>
@@ -72,3 +72,4 @@ $categories = $pdo->query("SELECT * FROM categories")->fetchAll();
         <hr>
     </div>
 <?php endforeach; ?>
+<?php endif; ?>
