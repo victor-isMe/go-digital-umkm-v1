@@ -10,6 +10,13 @@ $total = 0;
 
 <h2>Keranjang Saya</h2>
 
+<?php
+if (!empty($_SESSION["error"])) {
+    echo "<p style='color: red;'>" . $_SESSION['error'] . "</p>";
+    unset($_SESSION["error"]);
+}
+?>
+
 <?php if (empty($cart)): ?>
     Keranjang Anda kosong.
 <?php else: ?>
