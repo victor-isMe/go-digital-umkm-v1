@@ -18,9 +18,25 @@ $total = 0;
         $total += $subtotal; 
     ?>
         <div>
-            <?= $item["name"] ?>
-            (<?= $item["quantity"] ?> x Rp<?= $item["price"] ?>)
-            = Rp<?= $subtotal ?>
+            <strong><?= $item["name"] ?></strong><br>
+            Harga: Rp<?= $item["price"] ?><br>
+            Quantity: <?= $item["quantity"] ?>
+
+            <br><br>
+
+            <form action="update_cart.php" method="POST" style="display: inline;">
+                <input type="hidden" name="product_id" value="<?= $id ?>">
+                <input type="hidden" name="action" value="increase">
+
+                <button type="submit">+</button>
+            </form>
+
+            <br><br>
+
+            Subtotal: Rp<?= $subtotal ?>
+
+            <hr>
+            
         </div>
     <?php endforeach; ?>
 
