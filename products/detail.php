@@ -21,6 +21,13 @@ $stmtReviews = $pdo->prepare("SELECT reviews.*, users.name
 $stmtReviews->execute([$id]);
 $reviews = $stmtReviews->fetchAll();
 
+$stmtRate = $pdo->prepare("SELECT AVG(rating) AS avg_rate
+                            FROM reviews
+                            WHERE product_id = ?
+                        ");
+$stmtRate->execute([$id]);
+$avgRate = $stmtRate->fetch();
+
 if (!$product) {
     die("Produk tidak ditemukan!");
 }
@@ -47,6 +54,10 @@ Deskripsi: <?= htmlspecialchars($product["description"]) ?><br>
 
 <hr>
 <a href="list.php">Kembali</a>
+<hr>
+
+Rating Produk: ⭐<?= round($avgRate["avg_rate"],1) ?>/5
+
 <hr>
 
 <h3>Reviews Produk</h3>
