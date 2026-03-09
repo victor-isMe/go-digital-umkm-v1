@@ -4,10 +4,18 @@ require_once "../config/database.php";
 $category = $_GET["category"] ?? "";
 $search = $_GET["search"] ?? "";
 
-$sql = "SELECT products.*, users.name AS umkm_name, categories.name AS category_name
+$sql = "SELECT products.*, 
+        users.name AS umkm_name, 
+        categories.name AS category_name,
+        AVG(reviews.rating) AS avg_rate,
+        COUNT(reviews.id) AS total_rate
+
         FROM products
+
         JOIN users ON products.user_id=users.id
         LEFT JOIN categories ON products.category_id=categories.id
+        LEFT JOIN reviews ON products.id=reviews.product_id
+
         WHERE 1
         ";
 $params = [];
@@ -18,11 +26,11 @@ if (!empty($search)) {
 } 
 
 if (!empty($category)) {
-    $sql .= " AND products.category_id = ?";
+    $sql .= " AND products.category_id = ? ";
     $params[] = $category;
 }
 
-$sql .= " ORDER BY products.created_at DESC";
+$sql .= " GROUP BY products.id ORDER BY products.created_at DESC";
 
 $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
@@ -61,10 +69,20 @@ $categories = $pdo->query("SELECT * FROM categories")->fetchAll();
 <?php else: ?>
 
 <?php foreach ($products as $product): ?>
+    <?php
+    $rating = $product["avg_rate"] ? round($product["avg_rate"],1) : 0;
+    $reviews = $product["total_rate"];
+    ?>
+
     <div>
         <strong><?= htmlspecialchars($product["name"]) ?></strong><br>
         Kategori: <?= $product["category_name"] ?><br>
         UMKM: <?= htmlspecialchars($product['umkm_name']) ?><br>
+        <?php if ($reviews > 0): ?>
+            ⭐ <?= $rating ?> (<?= $reviews ?> review) <br>
+        <?php else: ?>
+            (<?= $reviews ?> review) <br>
+        <?php endif; ?>
         Harga: Rp<?= $product["price"] ?><br>
         Stok: <?= $product["stock"] ?><br>
 
