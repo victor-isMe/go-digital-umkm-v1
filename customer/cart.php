@@ -26,9 +26,16 @@ $total = 0;
 
             <form action="update_cart.php" method="POST" style="display: inline;">
                 <input type="hidden" name="product_id" value="<?= $id ?>">
+                <input type="hidden" name="action" value="decrease">
+
+                <button type="submit">-</button>
+            </form>
+
+            <form action="update_cart.php" method="POST" style="display: inline;">
+                <input type="hidden" name="product_id" value="<?= $id ?>">
                 <input type="hidden" name="action" value="increase">
 
-                <button type="submit">+</button>
+                <button type="submit" onclick="return confirm('Hapus produk dari keranjang anda?')">+</button>
             </form>
 
             <br><br>
@@ -36,7 +43,7 @@ $total = 0;
             Subtotal: Rp<?= $subtotal ?>
 
             <hr>
-            
+
         </div>
     <?php endforeach; ?>
 
