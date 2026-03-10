@@ -19,7 +19,8 @@ $orders = $stmt->fetchAll();
         Order ID: <?= $order["id"] ?><br>
         Total: Rp<?= $order["total_price"] ?><br>
         Metode Bayar: <?= $order["payment_method"] ?><br>
-        Status: <?= $order["status"] ?><br>
+        Status: <?= $order["status"] ?><br><br>
+        <a href="order_detail.php?id=<?= $order['id'] ?>">Lihat detail</a>
         <hr>
     </div>
 <?php endforeach; ?>
