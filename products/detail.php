@@ -42,7 +42,7 @@ Stok: <?= $product["stock"] ?><br>
 Deskripsi: <?= htmlspecialchars($product["description"]) ?><br>
 
 <?php if ($product["stock"] > 0): ?>
-    <form action="../customer/add_to_cart.php" method="POST">
+    <form action="../orders/create_order.php" method="POST">
         <input type="hidden" name="product_id" value="<?= $product["id"] ?>">
         Quantity:
         <input type="number" name="quantity" min="1" max="<?= $product["stock"] ?>" required>
