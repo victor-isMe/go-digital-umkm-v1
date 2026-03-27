@@ -25,13 +25,13 @@ session_start();
                 <li><a href="">Contact</a></li>
                 <li>
                     <?php
-                    if (!isset($_SESSION['role'])) {
+                    if (!isset($_SESSION['user']['role'])) {
                         echo '<a href="../auth/login.php">Dashboard</a>';
-                    } elseif ($_SESSION['role'] == 'admin') {
+                    } elseif ($_SESSION['user']['role'] == 'admin') {
                         echo '<a href="../admin/dashboard.php">Dashboard</a>';
-                    } elseif ($_SESSION['role'] == 'umkm') {
+                    } elseif ($_SESSION['user']['role'] == 'umkm') {
                         echo '<a href="../umkm/dashboard.php">Dashboard</a>';
-                    } elseif ($_SESSION['role'] == 'customer') {
+                    } elseif ($_SESSION['user']['role'] == 'customer') {
                         echo '<a href="../customer/dashboard.php">Dashboard</a>';
                     }
                     ?>
