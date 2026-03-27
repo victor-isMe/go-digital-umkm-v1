@@ -26,13 +26,13 @@ session_start();
                 <li>
                     <?php
                     if (!isset($_SESSION['role'])) {
-                        echo '<a href="login.php">Dashboard</a>';
+                        echo '<a href="../auth/login.php">Dashboard</a>';
                     } elseif ($_SESSION['role'] == 'admin') {
-                        echo '<a href="admin/dashboard.php">Dashboard</a>';
+                        echo '<a href="../admin/dashboard.php">Dashboard</a>';
                     } elseif ($_SESSION['role'] == 'umkm') {
-                        echo '<a href="umkm/dashboard.php">Dashboard</a>';
+                        echo '<a href="../umkm/dashboard.php">Dashboard</a>';
                     } elseif ($_SESSION['role'] == 'customer') {
-                        echo '<a href="customer/dashboard.php">Dashboard</a>';
+                        echo '<a href="../customer/dashboard.php">Dashboard</a>';
                     }
                     ?>
                 </li>
