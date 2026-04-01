@@ -1,5 +1,18 @@
 <?php
 session_start();
+include __DIR__ . '/../config/config.php';
+
+$dashboard_link = $base_url . 'auth/login.php';
+
+if (isset($_SESSION['user'])) {
+    if ($_SESSION['user']['role'] == 'admin') {
+        $dashboard_link = $base_url . 'admin/dashboard.php';
+    } elseif ($_SESSION['user']['role'] == 'umkm') {
+        $dashboard_link = $base_url . 'umkm/dashboard.php';
+    } elseif ($_SESSION['user']['role'] == 'customer') {
+        $dashboard_link = $base_url . 'customer/dashboard.php';
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,23 +32,11 @@ session_start();
 
         <nav>
             <ul>
-                <li><a href="../index.php">Home</a></li>
-                <li><a href="../products/list.php">Products</a></li>
+                <li><a href="<?= $base_url ?>index.php">Home</a></li>
+                <li><a href="<?= $base_url ?>products/list.php">Products</a></li>
                 <li><a href="">News</a></li>
                 <li><a href="">Contact</a></li>
-                <li>
-                    <?php
-                    if (!isset($_SESSION['user']['role'])) {
-                        echo '<a href="../auth/login.php">Dashboard</a>';
-                    } elseif ($_SESSION['user']['role'] == 'admin') {
-                        echo '<a href="../admin/dashboard.php">Dashboard</a>';
-                    } elseif ($_SESSION['user']['role'] == 'umkm') {
-                        echo '<a href="../umkm/dashboard.php">Dashboard</a>';
-                    } elseif ($_SESSION['user']['role'] == 'customer') {
-                        echo '<a href="../customer/dashboard.php">Dashboard</a>';
-                    }
-                    ?>
-                </li>
+                <li><a href="<?= $dashboard_link ?>">Dashboard</a></li>
             </ul>
         </nav>
     </header>
