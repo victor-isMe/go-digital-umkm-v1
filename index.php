@@ -1,8 +1,15 @@
 <?php include "partials/header.php"; ?>
 
-<main style="min-height: 100vh;">
-    <h1>Test</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque quam velit provident aliquam odio, dicta doloribus ad in fugit, labore hic quisquam, mollitia possimus quibusdam unde totam veritatis quas id?</p>
-</main>
+<section class="hero">
+    <h1>Dukung UMKM Lokal
+        <span>Wujudkan Ekonomi Berkelanjutan</span>
+    </h1>
+    <p>Platform marketplace produk UMKM Indonesia</p>
+
+    <div class="heroBtn">
+        <a href="products/list.php">Jelajahi Produk</a>
+        <a href="auth/login.php">Masuk Sekarang</a>
+    </div>
+</section>
 
 <?php include "partials/footer.php"; ?>
