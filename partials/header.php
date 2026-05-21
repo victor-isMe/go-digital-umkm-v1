@@ -22,22 +22,27 @@ if (isset($_SESSION['user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Go Digital UMKM</title>
     <link rel="stylesheet" href="../assets/css/style.css">
-    <link href="https://jsdelivr.net" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="icon" href="../assets/icons/">
 </head>
 <body>
-    <header>
-        <a href="../index.php">
-            <img src="../assets/images/" alt="Logo">
-        </a>
+    <header class="navbar sticky-top shadow navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a href="../index.php">
+                <img src="../assets/images/" alt="Logo">
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
 
-        <nav>
-            <ul>
-                <li><a href="<?= $base_url ?>index.php">Home</a></li>
-                <li><a href="<?= $base_url ?>products/list.php">Products</a></li>
-                <li><a href="">News</a></li>
-                <li><a href="">Contact</a></li>
-                <li><a href="<?= $dashboard_link ?>">Dashboard</a></li>
+        <nav class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav justify-content-center text-center ms-auto">
+                <li class="nav-item"><a class="nav-link" href="<?= $base_url ?>index.php">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?= $base_url ?>products/list.php">Products</a></li>
+                <li class="nav-item"><a class="nav-link" href="">News</a></li>
+                <li class="nav-item"><a class="nav-link" href="">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?= $dashboard_link ?>">Dashboard</a></li>
             </ul>
         </nav>
     </header>
