@@ -1,5 +1,6 @@
 <?php
 require_once "../config/database.php";
+include "../partials/header.php";
 
 $category = $_GET["category"] ?? "";
 $search = $_GET["search"] ?? "";
@@ -39,55 +40,59 @@ $products = $stmt->fetchAll();
 $categories = $pdo->query("SELECT * FROM categories")->fetchAll();
 ?>
 
-<h2>Daftar Produk UMKM</h2>
-<a href="../auth/login.php">Login</a>
+<div class="min-vh-100">
+    <h2>Daftar Produk UMKM</h2>
+    <a href="../auth/login.php">Login</a>
 
-<hr>
+    <hr>
 
-<form method="GET">
-    <input type="text" name="search" placeholder="Cari produk..." value="<?= htmlspecialchars(($search)) ?>">
+    <form method="GET">
+        <input type="text" name="search" placeholder="Cari produk..." value="<?= htmlspecialchars(($search)) ?>">
 
-    <select name="category">
-        <option value="">Semua Kategori</option>
+        <select name="category">
+            <option value="">Semua Kategori</option>
 
-        <?php foreach ($categories as $categori): ?>
-            <option value="<?= $categori["id"] ?>">
-                <?= $categori["name"] ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
+            <?php foreach ($categories as $categori): ?>
+                <option value="<?= $categori["id"] ?>">
+                    <?= $categori["name"] ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
 
-    <button type="submit">Search</button>
-</form>
+        <button type="submit">Search</button>
+    </form>
 
-<hr>
+    <hr>
 
-<?php if (empty($products)): ?>
+    <?php if (empty($products)): ?>
 
-    Produk tidak ditemukan
+        Produk tidak ditemukan
 
-<?php else: ?>
+    <?php else: ?>
 
-<?php foreach ($products as $product): ?>
-    <?php
-    $rating = $product["avg_rate"] ? round($product["avg_rate"],1) : 0;
-    $reviews = $product["total_rate"];
-    ?>
+    <?php foreach ($products as $product): ?>
+        <?php
+        $rating = $product["avg_rate"] ? round($product["avg_rate"],1) : 0;
+        $reviews = $product["total_rate"];
+        ?>
 
-    <div>
-        <strong><?= htmlspecialchars($product["name"]) ?></strong><br>
-        Kategori: <?= $product["category_name"] ?><br>
-        UMKM: <?= htmlspecialchars($product['umkm_name']) ?><br>
-        <?php if ($reviews > 0): ?>
-            ⭐ <?= $rating ?> (<?= $reviews ?> review) <br>
-        <?php else: ?>
-            (<?= $reviews ?> review) <br>
-        <?php endif; ?>
-        Harga: Rp<?= $product["price"] ?><br>
-        Stok: <?= $product["stock"] ?><br>
+        <div>
+            <strong><?= htmlspecialchars($product["name"]) ?></strong><br>
+            Kategori: <?= $product["category_name"] ?><br>
+            UMKM: <?= htmlspecialchars($product['umkm_name']) ?><br>
+            <?php if ($reviews > 0): ?>
+                ⭐ <?= $rating ?> (<?= $reviews ?> review) <br>
+            <?php else: ?>
+                (<?= $reviews ?> review) <br>
+            <?php endif; ?>
+            Harga: Rp<?= $product["price"] ?><br>
+            Stok: <?= $product["stock"] ?><br>
 
-        <a href="detail.php?id=<?= $product["id"] ?>">Detail Produk</a>
-        <hr>
-    </div>
-<?php endforeach; ?>
-<?php endif; ?>
+            <a href="detail.php?id=<?= $product["id"] ?>">Detail Produk</a>
+            <hr>
+        </div>
+    <?php endforeach; ?>
+    <?php endif; ?>
+</div>
+
+<?php include "../partials/footer.php"; ?>

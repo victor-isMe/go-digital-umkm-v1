@@ -28,8 +28,8 @@ if (isset($_SESSION['user'])) {
 <body>
     <header class="navbar sticky-top shadow navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a href="../index.php">
-                <img src="../assets/images/" alt="Logo">
+            <a href="./index.php">
+                <img src="./assets/images/logo0.png" alt="Logo" style="width: 40px;">
             </a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
