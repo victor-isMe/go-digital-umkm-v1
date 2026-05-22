@@ -1,6 +1,6 @@
 <?php 
 require_once "../config/database.php";
-require_once "../core/functions.php";
+include "../partials/header.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST["email"];
@@ -26,9 +26,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 ?>
 
-<h2>Login</h2>
-<form method="POST">
-    <input type="email" name="email" placeholder="Email" required><br><br>
-    <input type="password" name="password" placeholder="Password" required><br><br>
-    <button type="submit">Login</button>
-</form>
+<div class="min-vh-100">
+    <h2>Login</h2>
+    <formu method="POST">
+        <input type="email" name="email" placeholder="Email" required><br><br>
+        <input type="password" name="password" placeholder="Password" required><br><br>
+        <button type="submit">Login</button>
+    </form>
+</div>
+
+<?php include "../partials/footer.php"; ?>
